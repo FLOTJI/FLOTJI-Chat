@@ -1,40 +1,47 @@
-# FLOTJI-chat 2.1
+# FLOTJI-chat 5.0
 
-Панель приложений: слева иконки, справа настоящая веб-версия сервиса.
-
-Вход в аккаунт сохраняется между запусками.
-
-## Приложения
-
-| Иконка | Сервис | Адрес |
-|---|---|---|
-| TG | Telegram | web.telegram.org/k |
-| VK | VK Мессенджер | vk.com/im |
-| YM | Яндекс Музыка | music.yandex.ru |
-| TT | TikTok | tiktok.com |
-| G | Google | google.com |
-| AI | MASS AI | dsh.mass-ai.ru |
-
-## Возможности
-
-- Строка состояния: время, дата, погода (Open-Meteo).
-- Настройки (⚙): город погоды, тёмная/светлая тема, вид «FLOTJI-chat», скрытые иконки, очистка данных.
-- Долгое нажатие на иконку: обновить / открыть в браузере / выйти / скрыть.
-- Кнопка ««» — свернуть панель.
-- В памяти держится только один WebView — меньше лагов.
+Панель сервисов (Telegram, VK, Яндекс Музыка, TikTok, Google, MASS AI)
+плюс голосовой помощник FLOTJI.
 
 ## Сборка
 
-GitHub Actions собирает APK автоматически при push в main.
+GitHub Actions собирает APK автоматически при push в `main`.
 
-APK: Actions → Build APK → Artifacts → FlotjiHub-APK.
+Артефакт: Actions → последний запуск → `FlotjiChat-APK` → `app-debug.apk`
+
+Локально:
+
+```
+gradle wrapper --gradle-version 8.7
+gradle assembleDebug
+```
+
+APK: `app/build/outputs/apk/debug/app-debug.apk`
+
+## Голос
+
+Скажите «Флотжи, …». Микрофон работает, пока приложение открыто.
+
+Примеры команд:
+
+- «Флотжи, который час»
+- «Флотжи, включи фонарик»
+- «Флотжи, будильник на 7:30»
+- «Флотжи, громче» / «тише» / «без звука»
+- «Флотжи, заряд батареи»
+- «Флотжи, открой ютуб»
+- «Флотжи, пауза» / «играй» / «следующий»
+
+Всё, что не распознано как локальная команда, уходит в AI-ответчик.
 
 ## Структура
 
 ```
-app/src/main/java/ru/flotji/hub/MainActivity.kt   — весь код приложения
-app/src/main/res/drawable/                        — векторные иконки
-app/src/main/res/values/                          — строки и тема
-app/src/main/AndroidManifest.xml                  — манифест
-.github/workflows/build.yml                       — сборка APK
+app/src/main/java/ru/flotji/hub/
+  MainActivity.kt    — UI, WebView, погода, настройки
+  VoiceAssistant.kt  — распознавание речи + TTS
+  DeviceControl.kt   — локальные команды устройства
+  AiClient.kt        — запрос к AI
 ```
+
+Зависимостей нет: только Android SDK и Kotlin.
