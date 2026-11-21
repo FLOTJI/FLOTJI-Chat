@@ -226,7 +226,7 @@ class MainActivity : Activity() {
         timeTv = TextView(this)
         timeTv.setTextColor(cText)
         timeTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-        timeTv.setTypeface(typeface, Typeface.BOLD)
+        timeTv.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD)
         status.addView(timeTv)
 
         content.addView(
@@ -280,7 +280,7 @@ class MainActivity : Activity() {
             head.gravity = Gravity.CENTER
             head.setTextColor(cSub)
             head.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9f)
-            head.setTypeface(typeface, Typeface.BOLD)
+            head.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD)
             rail.addView(head, LinearLayout.LayoutParams(dp(54), dp(38)))
         }
 
@@ -305,7 +305,7 @@ class MainActivity : Activity() {
                 tv.text = a.short
                 tv.setTextColor(cSub)
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
-                tv.setTypeface(typeface, Typeface.BOLD)
+                tv.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD)
                 tile.addView(
                     tv,
                     FrameLayout.LayoutParams(
